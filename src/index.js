@@ -1,18 +1,20 @@
 const path = require('path');
-const fs = require('fs');
+const { writeFile, stat, readdir } = require('fs/promises');
 const { Select } = require('enquirer');
+const { readFileSync } = require('fs');
 
 const { EXTENSIONS_DIR } = require('./constants');
+const { convertTheme } = require('./converter');
 
 const getExtensions = async () => {
-  const entities = await fs.promises.readdir(EXTENSIONS_DIR);
+  const entities = await readdir(EXTENSIONS_DIR);
 
   const extensions = [];
 
   for (let entity of entities) {
-    const stat = await fs.promises.stat(`${EXTENSIONS_DIR}/${entity}`);
+    const statResult = await stat(`${EXTENSIONS_DIR}/${entity}`);
 
-    if (stat.isDirectory()) {
+    if (statResult.isDirectory()) {
       extensions.push(entity);
     }
   }
@@ -24,7 +26,7 @@ const getThemes = (extensions) => {
   const themes = {};
 
   extensions.forEach((extension) => {
-    const packageJSON = fs.readFileSync(`${EXTENSIONS_DIR}/${extension}/package.json`);
+    const packageJSON = readFileSync(`${EXTENSIONS_DIR}/${extension}/package.json`);
     const data = JSON.parse(packageJSON);
 
     if (Array.isArray(data.contributes.themes)) {
@@ -58,7 +60,10 @@ const getThemes = (extensions) => {
 
     const selectedTheme = themes[answer];
 
-    console.log(selectedTheme);
+    const iTermTheme = await convertTheme(selectedTheme);
+    const fileName = `${selectedTheme.name}-${Date.now()}.itermcolors`;
+
+    await writeFile(fileName, iTermTheme, { encoding: 'utf-8' });
   } catch (e) {
     console.error('Something went wrong!', e);
   }

@@ -1,32 +1,25 @@
 const path = require('path');
 const fs = require('fs');
-const homedir = require("os").homedir();
+// const { Command } = require('commander');
+const { THEME_CATEGORY, EXTENSIONS_DIR } = require('./constants');
 
-const THEME_CATEGORY = 'Themes';
-
-/**
- * TODO:
- * 1. Generalise this for MacOS, Windowsm, Linux
- * 2. Take this as parameter (optional)
- */
-const EXTENSIONS_DIR = `${homedir}/.vscode/extensions`;
+// const program = new Command();
 
 const getExtensions = async () => {
   const entities = await fs.promises.readdir(EXTENSIONS_DIR);
 
   const extensions = [];
 
-  for (entity of entities) {
+  for (let entity of entities) {
     const stat = await fs.promises.stat(`${EXTENSIONS_DIR}/${entity}`);
-    
+
     if (stat.isDirectory()) {
       extensions.push(entity);
     }
-  
   }
 
   return extensions;
-}
+};
 
 const getThemes = (extensions) => {
   const themes = [];
@@ -58,6 +51,6 @@ const getThemes = (extensions) => {
 
     console.log(themes);
   } catch (e) {
-    console.error("Something went wrong!", e);
+    console.error('Something went wrong!', e);
   }
 })();

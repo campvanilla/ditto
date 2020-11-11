@@ -1,9 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-// const { Command } = require('commander');
+const { Select } = require('enquirer');
 const { THEME_CATEGORY, EXTENSIONS_DIR } = require('./constants');
-
-// const program = new Command();
 
 const getExtensions = async () => {
   const entities = await fs.promises.readdir(EXTENSIONS_DIR);
@@ -22,7 +20,7 @@ const getExtensions = async () => {
 };
 
 const getThemes = (extensions) => {
-  const themes = [];
+  const themes = {};
 
   extensions.forEach((extension) => {
     const packageJSON = fs.readFileSync(`${EXTENSIONS_DIR}/${extension}/package.json`);
@@ -30,10 +28,10 @@ const getThemes = (extensions) => {
 
     if (data.categories.includes(THEME_CATEGORY) && Array.isArray(data.contributes.themes)) {
       data.contributes.themes.forEach((theme) => {
-        themes.push({
+        themes[theme.label] = {
           name: theme.label,
           path: path.join(EXTENSIONS_DIR, extension, theme.path),
-        });
+        };
       });
     }
   });
@@ -49,7 +47,17 @@ const getThemes = (extensions) => {
     console.log('Filtering out themes...');
     const themes = getThemes(extensions);
 
-    console.log(themes);
+    const prompt = new Select({
+      name: 'themes',
+      message: 'Select the vscode theme:',
+      choices: Object.keys(themes),
+    });
+
+    const answer = await prompt.run();
+
+    const selectedTheme = themes[answer];
+
+    console.log(selectedTheme);
   } catch (e) {
     console.error('Something went wrong!', e);
   }

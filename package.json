@@ -1,10 +1,10 @@
 {
   "name": "ditto",
   "version": "0.1.0",
-  "description": "",
-  "main": "src/index.js",
   "dependencies": {
-    "enquirer": "^2.3.6"
+    "enquirer": "^2.3.6",
+    "fast-xml-parser": "^3.17.4",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
@@ -14,6 +14,8 @@
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2"
   },
+  "description": "Convert vscode theme to iterm colors",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

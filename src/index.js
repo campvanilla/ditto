@@ -1,7 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const { Select } = require('enquirer');
-const { THEME_CATEGORY, EXTENSIONS_DIR } = require('./constants');
+
+const { EXTENSIONS_DIR } = require('./constants');
 
 const getExtensions = async () => {
   const entities = await fs.promises.readdir(EXTENSIONS_DIR);
@@ -26,7 +27,7 @@ const getThemes = (extensions) => {
     const packageJSON = fs.readFileSync(`${EXTENSIONS_DIR}/${extension}/package.json`);
     const data = JSON.parse(packageJSON);
 
-    if (data.categories.includes(THEME_CATEGORY) && Array.isArray(data.contributes.themes)) {
+    if (Array.isArray(data.contributes.themes)) {
       data.contributes.themes.forEach((theme) => {
         themes[theme.label] = {
           name: theme.label,

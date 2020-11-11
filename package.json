@@ -1,0 +1,28 @@
+{
+  "name": "ditto",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^6.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/campvanilla/ditto.git"
+  },
+  "keywords": [
+    "vscode",
+    "theme",
+    "iterm2"
+  ],
+  "author": "Aditi Mohanty <aditi.anomita@gmail.com>, Abinav Seelan <abinav.n.seelan@gmail.com>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/campvanilla/ditto/issues"
+  },
+  "homepage": "https://github.com/campvanilla/ditto#readme"
+}

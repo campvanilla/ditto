@@ -46,7 +46,7 @@ const getThemes = (extensions, extensionsDir) => {
 
 (async () => {
   try {
-    const cliArgs = extractCliArguments();
+    const cliArgs = extractCliArguments(process.argv);
 
     if (cliArgs[CLI_ARGS.HELP]) {
       renderHelp();

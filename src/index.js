@@ -3,16 +3,18 @@ const { writeFile, stat, readdir } = require('fs/promises');
 const { Select } = require('enquirer');
 const { readFileSync } = require('fs');
 
-const { EXTENSIONS_DIR } = require('./constants');
+const { EXTENSIONS_DIR, CLI_ARGS } = require('./constants');
 const { convertTheme } = require('./converter');
+const { renderHelp } = require('./help');
+const { extractCliArguments } = require('./utils/cliArguments');
 
-const getExtensions = async () => {
-  const entities = await readdir(EXTENSIONS_DIR);
+const getExtensions = async (extensionsDir) => {
+  const entities = await readdir(extensionsDir);
 
   const extensions = [];
 
   for (let entity of entities) {
-    const statResult = await stat(`${EXTENSIONS_DIR}/${entity}`);
+    const statResult = await stat(`${extensionsDir}/${entity}`);
 
     if (statResult.isDirectory()) {
       extensions.push(entity);
@@ -22,18 +24,18 @@ const getExtensions = async () => {
   return extensions;
 };
 
-const getThemes = (extensions) => {
+const getThemes = (extensions, extensionsDir) => {
   const themes = {};
 
   extensions.forEach((extension) => {
-    const packageJSON = readFileSync(`${EXTENSIONS_DIR}/${extension}/package.json`);
+    const packageJSON = readFileSync(`${extensionsDir}/${extension}/package.json`);
     const data = JSON.parse(packageJSON);
 
-    if (Array.isArray(data.contributes.themes)) {
+    if (data.contributes && Array.isArray(data.contributes.themes)) {
       data.contributes.themes.forEach((theme) => {
         themes[theme.label] = {
           name: theme.label,
-          path: path.join(EXTENSIONS_DIR, extension, theme.path),
+          path: path.join(extensionsDir, extension, theme.path),
         };
       });
     }
@@ -44,11 +46,17 @@ const getThemes = (extensions) => {
 
 (async () => {
   try {
+    const cliArgs = extractCliArguments();
+
+    if (cliArgs[CLI_ARGS.HELP]) {
+      renderHelp();
+    }
+
     console.log('Fetching extensions...');
-    const extensions = await getExtensions();
+    const extensions = await getExtensions(cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR);
 
     console.log('Filtering out themes...');
-    const themes = getThemes(extensions);
+    const themes = getThemes(extensions, cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR);
 
     const prompt = new Select({
       name: 'themes',
@@ -63,7 +71,8 @@ const getThemes = (extensions) => {
     const iTermTheme = await convertTheme(selectedTheme);
     const fileName = `${selectedTheme.name}-${Date.now()}.itermcolors`;
 
-    await writeFile(fileName, iTermTheme, { encoding: 'utf-8' });
+    const fileToWrite = cliArgs[CLI_ARGS.OUTPUT_DIR] ? `${cliArgs[CLI_ARGS.OUTPUT_DIR]}/${fileName}` : fileName;
+    await writeFile(fileToWrite, iTermTheme, { encoding: 'utf-8' });
   } catch (e) {
     console.error('Something went wrong!', e);
   }

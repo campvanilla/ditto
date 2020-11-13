@@ -7,6 +7,12 @@ const homedir = require('os').homedir();
  */
 exports.EXTENSIONS_DIR = `${homedir}/.vscode/extensions`;
 
+exports.CLI_ARGS = {
+  EXTENSIONS_DIR: '--extensionsDir',
+  HELP: '--help',
+  OUTPUT_DIR: '--outputDir',
+};
+
 exports.ANSI_COLOR_FROM_VSCODE = {
   'Ansi 0 Color': ['terminal.ansiBlack'],
   'Ansi 1 Color': ['terminal.ansiRed'],

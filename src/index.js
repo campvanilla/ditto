@@ -75,7 +75,7 @@ const getThemes = (extensions, extensionsDir) => {
 
     await writeFile(fileToWrite, iTermTheme, { encoding: 'utf-8' });
 
-    console.log(`Theme file exported as ${fileToWrite}`);
+    console.log(`Theme file exported as ${path.resolve(fileToWrite)}`);
   } catch (e) {
     if (!e) {
       process.exit(-1);

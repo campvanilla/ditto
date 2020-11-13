@@ -70,6 +70,10 @@ describe('hexToRGBA()', () => {
       ['#F0F', { red: 1, green: 0, blue: 1, alpha: 1 }],
       ['#F0F8', { red: 1, green: 0, blue: 1, alpha: 0.5333333333333333 }],
       ['#2bbbad', { red: 0.16862745098039217, green: 0.7333333333333333, blue: 0.6784313725490196, alpha: 1 }],
+      [
+        '#2bbbad58',
+        { red: 0.16862745098039217, green: 0.7333333333333333, blue: 0.6784313725490196, alpha: 0.34509803921568627 },
+      ],
       ['#DB7093', { red: 0.8588235294117647, green: 0.4392156862745098, blue: 0.5764705882352941, alpha: 1 }],
     ])('%s', (hex, rgba) => {
       expect(hexToRGBA(hex)).toEqual(rgba);

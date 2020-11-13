@@ -3,38 +3,11 @@ const json5 = require('json5');
 
 const { ANSI_COLOR_FROM_VSCODE: VSCODE_THEME_KEY_TO_ANSI_COLOR } = require('./constants');
 const { hexToRGBA } = require('./utils/color');
+const { iterm } = require('./utils/xml');
 
 const readTheme = async (path) => {
   const contents = (await readFile(path)).toString();
   return json5.parse(contents);
-};
-
-const createItermColorComponent = (color) => `
-  <key>${color.key}</key>
-  <dict>
-    <key>Alpha Component</key>
-    <real>${color.alpha}</real>
-    <key>Blue Component</key>
-    <real>${color.blue}</real>
-    <key>Color Space</key>
-    <string>sRGB</string>
-    <key>Green Component</key>
-    <real>${color.green}</real>
-    <key>Red Component</key>
-    <real>${color.red}</real>
-  </dict>
-`;
-
-const toItermXML = (colors) => {
-  return `
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-${colors.map(createItermColorComponent).join('')}
-</dict>
-</plist>
-  `;
 };
 
 exports.convertTheme = async ({ path }) => {
@@ -48,5 +21,5 @@ exports.convertTheme = async ({ path }) => {
     };
   });
 
-  return toItermXML(ansiColors);
+  return iterm.getThemeXML(ansiColors);
 };

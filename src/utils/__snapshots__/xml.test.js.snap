@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`iterm getColorComponent() generates the right xml color component 1`] = `
+"
+  <key>Foreground Color</key>
+  <dict>
+    <key>Alpha Component</key>
+    <real>0.34509803921568627</real>
+    <key>Blue Component</key>
+    <real>0.6784313725490196</real>
+    <key>Color Space</key>
+    <string>sRGB</string>
+    <key>Green Component</key>
+    <real>0.7333333333333333</real>
+    <key>Red Component</key>
+    <real>0.16862745098039217</real>
+  </dict>
+"
+`;
+
+exports[`iterm getThemeXML() generates an xml theme file 1`] = `
+"
+<?xml version=\\"1.0\\" encoding=\\"UTF-8\\"?>
+<!DOCTYPE plist PUBLIC \\"-//Apple//DTD PLIST 1.0//EN\\" \\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\">
+<plist version=\\"1.0\\">
+<dict>
+
+  <key>Foreground Color</key>
+  <dict>
+    <key>Alpha Component</key>
+    <real>0.34509803921568627</real>
+    <key>Blue Component</key>
+    <real>0.6784313725490196</real>
+    <key>Color Space</key>
+    <string>sRGB</string>
+    <key>Green Component</key>
+    <real>0.7333333333333333</real>
+    <key>Red Component</key>
+    <real>0.16862745098039217</real>
+  </dict>
+
+  <key>Background Color</key>
+  <dict>
+    <key>Alpha Component</key>
+    <real>0.34509803921568627</real>
+    <key>Blue Component</key>
+    <real>0.6784313725490196</real>
+    <key>Color Space</key>
+    <string>sRGB</string>
+    <key>Green Component</key>
+    <real>0.7333333333333333</real>
+    <key>Red Component</key>
+    <real>0.16862745098039217</real>
+  </dict>
+
+  <key>ANSI Color 0</key>
+  <dict>
+    <key>Alpha Component</key>
+    <real>1</real>
+    <key>Blue Component</key>
+    <real>0</real>
+    <key>Color Space</key>
+    <string>sRGB</string>
+    <key>Green Component</key>
+    <real>0</real>
+    <key>Red Component</key>
+    <real>0</real>
+  </dict>
+
+  <key>ANSI Color 1</key>
+  <dict>
+    <key>Alpha Component</key>
+    <real>1</real>
+    <key>Blue Component</key>
+    <real>0</real>
+    <key>Color Space</key>
+    <string>sRGB</string>
+    <key>Green Component</key>
+    <real>1</real>
+    <key>Red Component</key>
+    <real>1</real>
+  </dict>
+
+</dict>
+</plist>
+  "
+`;

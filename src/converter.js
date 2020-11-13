@@ -2,23 +2,11 @@ const { readFile } = require('fs/promises');
 const json5 = require('json5');
 
 const { ANSI_COLOR_FROM_VSCODE: VSCODE_THEME_KEY_TO_ANSI_COLOR } = require('./constants');
+const { hexToRGBA } = require('./utils/color');
 
 const readTheme = async (path) => {
   const contents = (await readFile(path)).toString();
   return json5.parse(contents);
-};
-
-const hexToRGBA = (hex) => {
-  if (hex.length >= 6) {
-    const [red, green, blue, alpha] = hex.replace(/#/, '').match(/../g);
-    return {
-      red: parseInt(red, 16) / 255.0,
-      green: parseInt(green, 16) / 255.0,
-      blue: parseInt(blue, 16) / 255.0,
-      alpha: alpha ? parseInt(blue, 16) / 255.0 : 1,
-    };
-  }
-  throw 'less than 6';
 };
 
 const createItermColorComponent = (color) => `

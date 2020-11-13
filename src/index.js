@@ -72,8 +72,15 @@ const getThemes = (extensions, extensionsDir) => {
     const fileName = `${selectedTheme.name}-${Date.now()}.itermcolors`;
 
     const fileToWrite = cliArgs[CLI_ARGS.OUTPUT_DIR] ? `${cliArgs[CLI_ARGS.OUTPUT_DIR]}/${fileName}` : fileName;
+
     await writeFile(fileToWrite, iTermTheme, { encoding: 'utf-8' });
+
+    console.log(`Theme file exported as ${fileToWrite}`);
   } catch (e) {
+    if (!e) {
+      process.exit(-1);
+    }
+
     console.error('Something went wrong!', e);
   }
 })();

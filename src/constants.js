@@ -8,10 +8,26 @@ const homedir = require('os').homedir();
 exports.EXTENSIONS_DIR = `${homedir}/.vscode/extensions`;
 
 exports.CLI_ARGS = {
-  EXTENSIONS_DIR: '--extensionsDir',
-  HELP: '--help',
-  OUTPUT_DIR: '--outputDir',
+  EXTENSIONS_DIR: {
+    key: '--extensionsDir',
+    helpText: 'Path to directory containing your vscode extensions.',
+    optional: true,
+    defaultValue: () => exports.EXTENSIONS_DIR,
+  },
+  OUTPUT_DIR: {
+    key: '--outDir',
+    helpText: 'Folder to save the iterm2 theme.',
+    optional: true,
+    defaultValue: () => process.cwd(),
+  },
+  HELP: {
+    key: '--help',
+    helpText: 'CLI documentation',
+    optional: true,
+  },
 };
+
+exports.VALID_ARGS = Object.keys(exports.CLI_ARGS).map((arg) => exports.CLI_ARGS[arg].key);
 
 exports.ANSI_COLOR_FROM_VSCODE = {
   'Ansi 0 Color': ['terminal.ansiBlack'],

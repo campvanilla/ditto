@@ -2,6 +2,7 @@
 
 const path = require('path');
 const { writeFile } = require('fs/promises');
+const style = require('ansi-styles');
 const { Select } = require('enquirer');
 
 const { EXTENSIONS_DIR, CLI_ARGS } = require('./constants');
@@ -9,12 +10,13 @@ const { convertTheme } = require('./converter');
 const { renderHelp } = require('./help');
 const { extractCliArguments } = require('./utils/cliArguments');
 const { getExtensions, getThemes } = require('./utils/vscode');
+const { validateArgs } = require('./utils/validateArgs');
 
 const createAndWriteTheme = async (options) => {
-  const { theme, directory = '' } = options || {};
+  const { theme, directory = '.' } = options || {};
 
   const fileName = `${theme.name}-${Date.now()}.itermcolors`;
-  const filePath = path.join(directory, fileName);
+  const filePath = path.resolve(directory, fileName);
 
   const iTermTheme = await convertTheme(theme);
 
@@ -26,16 +28,14 @@ async function main() {
   try {
     const cliArgs = extractCliArguments(process.argv);
 
-    if (cliArgs[CLI_ARGS.HELP]) {
+    if (cliArgs[CLI_ARGS.HELP.key] || !validateArgs(cliArgs)) {
       renderHelp();
     }
 
-    const vscodeExtensionsPath = cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR;
+    const vscodeExtensionsPath = cliArgs[CLI_ARGS.EXTENSIONS_DIR.key] || EXTENSIONS_DIR;
 
-    console.log('Fetching extensions...');
     const extensions = await getExtensions(vscodeExtensionsPath);
 
-    console.log('Filtering out themes...');
     const themes = await getThemes(extensions, vscodeExtensionsPath);
 
     const prompt = new Select({
@@ -52,7 +52,7 @@ async function main() {
       directory: cliArgs[CLI_ARGS.OUTPUT_DIR],
     });
 
-    console.log(`Theme file exported as ${path.resolve(writtenPath)}`);
+    console.log(`Theme file exported as ${style.green.open}${writtenPath}${style.green.close}`);
   } catch (e) {
     if (!e) {
       process.exit(-1);

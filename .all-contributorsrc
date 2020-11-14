@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "rheaditi",
+      "name": "Aditi Mohanty",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6426069?v=4",
+      "profile": "https://aditimohanty.com",
+      "contributions": [
+        "ideas",
+        "code",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "ditto",
+  "projectOwner": "campvanilla",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}

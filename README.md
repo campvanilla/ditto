@@ -36,11 +36,44 @@ $ ditto-cli
 
 ### Custom Options
 
-| CLI Argument    | Optional | Details                                                                                                                   | Default Value               |   |
-|-----------------|----------|---------------------------------------------------------------------------------------------------------------------------|-----------------------|---|
-| --extensionsDir | yes      | To specify the folder containing your VSCode extensions you've configured VSCode to save extensions in a custom directory | ~/.vscode/extensions  |   |
-| --outDir        | yes      | To specify the folder to which the iTerm2 theme file will be written                                                      | The current directory |   |
-| --help          | yes      | Provides documentation                                                                                                    | -                     |   |
+<table>
+  <thead>
+    <tr>
+      <th width='30%'>
+        CLI Argument
+      </th>
+      <th width='15%'>
+        Optional
+      </th>
+      <th width='35%'>
+        Description
+      </th>
+      <th width='20%'>
+        Default Value
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>--extensionsDir</td>
+      <td>yes</td>
+      <td>To specify the folder containing your VSCode extensions you've configured VSCode to save extensions in a custom directory</td>
+      <td>~/.vscode/extensions</td>
+    </tr>
+    <tr>
+      <td>--outDir</td>
+      <td>yes</td>
+      <td>To specify the folder to which the iTerm2 theme file will be written</td>
+      <td>The current working directory</td>
+    </tr>
+    <tr>
+      <td>--help</td>
+      <td>yes</td>
+      <td>Provides documentation</td>
+      <td>-/td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## Development

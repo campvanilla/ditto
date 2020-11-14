@@ -1,5 +1,6 @@
 const path = require('path');
-const { stat, readdir, readFile } = require('fs/promises');
+
+const { stat, readdir, readFile } = require('./promises');
 
 exports.getExtensions = async (extensionsDir) => {
   const entities = await readdir(extensionsDir);

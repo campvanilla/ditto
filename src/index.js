@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const path = require('path');
-const { writeFile } = require('fs/promises');
 const style = require('ansi-styles');
 const { Select } = require('enquirer');
 
+const { writeFile } = require('./utils/promises');
 const { EXTENSIONS_DIR, CLI_ARGS } = require('./constants');
 const { convertTheme } = require('./converter');
 const { renderHelp } = require('./help');

@@ -1,6 +1,6 @@
-const { readFile } = require('fs/promises');
 const json5 = require('json5');
 
+const { readFile } = require('./utils/promises');
 const { ANSI_COLOR_FROM_VSCODE: VSCODE_THEME_KEY_TO_ANSI_COLOR } = require('./constants');
 const { hexToRGBA } = require('./utils/color');
 const { iterm } = require('./utils/xml');

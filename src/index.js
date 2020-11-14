@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path');
 const { writeFile } = require('fs/promises');
 const { Select } = require('enquirer');
@@ -20,7 +22,7 @@ const createAndWriteTheme = async (options) => {
   return filePath;
 };
 
-(async () => {
+async function main() {
   try {
     const cliArgs = extractCliArguments(process.argv);
 
@@ -58,4 +60,6 @@ const createAndWriteTheme = async (options) => {
 
     console.error('Something went wrong!', e);
   }
-})();
+}
+
+main();

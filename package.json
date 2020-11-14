@@ -1,7 +1,8 @@
 {
-  "name": "ditto",
+  "name": "@campvanilla/ditto",
   "version": "0.1.0",
   "dependencies": {
+    "ansi-styles": "^4.3.0",
     "enquirer": "^2.3.6",
     "json5": "^2.1.3"
   },
@@ -14,8 +15,18 @@
     "lint-staged": "^10.5.1",
     "prettier": "^2.1.2"
   },
-  "description": "Convert vscode theme to iterm colors",
+  "description": "Convert vscode theme to iterm2 colors",
   "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "bin": {
+    "@campvanilla/ditto-cli": "src/index.js",
+    "ditto-cli": "src/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "jest",
     "test:ci": "CI=true jest"
@@ -27,7 +38,10 @@
   "keywords": [
     "vscode",
     "theme",
-    "iterm2"
+    "iterm2",
+    "cli",
+    "themes",
+    "sync"
   ],
   "author": "Aditi Mohanty <aditi.anomita@gmail.com>, Abinav Seelan <abinav.n.seelan@gmail.com>",
   "license": "GPL-3.0-or-later",

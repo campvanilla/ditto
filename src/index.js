@@ -1,47 +1,23 @@
 const path = require('path');
-const { writeFile, stat, readdir } = require('fs/promises');
+const { writeFile } = require('fs/promises');
 const { Select } = require('enquirer');
-const { readFileSync } = require('fs');
 
 const { EXTENSIONS_DIR, CLI_ARGS } = require('./constants');
 const { convertTheme } = require('./converter');
 const { renderHelp } = require('./help');
 const { extractCliArguments } = require('./utils/cliArguments');
+const { getExtensions, getThemes } = require('./utils/vscode');
 
-const getExtensions = async (extensionsDir) => {
-  const entities = await readdir(extensionsDir);
+const createAndWriteTheme = async (options) => {
+  const { theme, directory = '' } = options || {};
 
-  const extensions = [];
+  const fileName = `${theme.name}-${Date.now()}.itermcolors`;
+  const filePath = path.join(directory, fileName);
 
-  for (let entity of entities) {
-    const statResult = await stat(`${extensionsDir}/${entity}`);
+  const iTermTheme = await convertTheme(theme);
 
-    if (statResult.isDirectory()) {
-      extensions.push(entity);
-    }
-  }
-
-  return extensions;
-};
-
-const getThemes = (extensions, extensionsDir) => {
-  const themes = {};
-
-  extensions.forEach((extension) => {
-    const packageJSON = readFileSync(`${extensionsDir}/${extension}/package.json`);
-    const data = JSON.parse(packageJSON);
-
-    if (data.contributes && Array.isArray(data.contributes.themes)) {
-      data.contributes.themes.forEach((theme) => {
-        themes[theme.label] = {
-          name: theme.label,
-          path: path.join(extensionsDir, extension, theme.path),
-        };
-      });
-    }
-  });
-
-  return themes;
+  await writeFile(filePath, iTermTheme, { encoding: 'utf-8' });
+  return filePath;
 };
 
 (async () => {
@@ -52,11 +28,13 @@ const getThemes = (extensions, extensionsDir) => {
       renderHelp();
     }
 
+    const vscodeExtensionsPath = cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR;
+
     console.log('Fetching extensions...');
-    const extensions = await getExtensions(cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR);
+    const extensions = await getExtensions(vscodeExtensionsPath);
 
     console.log('Filtering out themes...');
-    const themes = getThemes(extensions, cliArgs[CLI_ARGS.EXTENSIONS_DIR_ARG] || EXTENSIONS_DIR);
+    const themes = await getThemes(extensions, vscodeExtensionsPath);
 
     const prompt = new Select({
       name: 'themes',
@@ -65,17 +43,14 @@ const getThemes = (extensions, extensionsDir) => {
     });
 
     const answer = await prompt.run();
-
     const selectedTheme = themes[answer];
 
-    const iTermTheme = await convertTheme(selectedTheme);
-    const fileName = `${selectedTheme.name}-${Date.now()}.itermcolors`;
+    const writtenPath = await createAndWriteTheme({
+      theme: selectedTheme,
+      directory: cliArgs[CLI_ARGS.OUTPUT_DIR],
+    });
 
-    const fileToWrite = cliArgs[CLI_ARGS.OUTPUT_DIR] ? `${cliArgs[CLI_ARGS.OUTPUT_DIR]}/${fileName}` : fileName;
-
-    await writeFile(fileToWrite, iTermTheme, { encoding: 'utf-8' });
-
-    console.log(`Theme file exported as ${path.resolve(fileToWrite)}`);
+    console.log(`Theme file exported as ${path.resolve(writtenPath)}`);
   } catch (e) {
     if (!e) {
       process.exit(-1);

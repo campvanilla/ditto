@@ -1,6 +1,6 @@
 ![GithubBanner](https://user-images.githubusercontent.com/6417910/99155541-bcf99300-26de-11eb-893b-c7c24f5a24b2.png)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## ditto
@@ -80,6 +80,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://aditimohanty.com"><img src="https://avatars3.githubusercontent.com/u/6426069?v=4" width="100px;" alt=""/><br /><sub><b>Aditi Mohanty</b></sub></a><br /><a href="#ideas-rheaditi" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/campvanilla/ditto/commits?author=rheaditi" title="Code">💻</a> <a href="#maintenance-rheaditi" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://abinavseelan.com"><img src="https://avatars2.githubusercontent.com/u/6417910?v=4" width="100px;" alt=""/><br /><sub><b>Abinav Seelan</b></sub></a><br /><a href="https://github.com/campvanilla/ditto/commits?author=abinavseelan" title="Code">💻</a> <a href="#maintenance-abinavseelan" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 

@@ -70,7 +70,7 @@ $ ditto-cli
       <td>--help</td>
       <td>yes</td>
       <td>Provides documentation</td>
-      <td>-/td>
+      <td>-</td>
     </tr>
   </tbody>
 </table>

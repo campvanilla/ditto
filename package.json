@@ -1,5 +1,5 @@
 {
-  "name": "@campvanilla/ditto",
+  "name": "@campvanilla/ditto-cli",
   "version": "1.0.0-alpha.1",
   "dependencies": {
     "ansi-styles": "^4.3.0",

@@ -1,4 +1,7 @@
-![GithubBanner](https://user-images.githubusercontent.com/6417910/99155541-bcf99300-26de-11eb-893b-c7c24f5a24b2.png)
+<div align="center">
+  <img width="572" alt="Banner" src="https://user-images.githubusercontent.com/6417910/99180750-0681c680-274f-11eb-9928-c691a7a0198a.png">
+</div>
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -9,24 +12,20 @@
 
 ![BannerGif](https://user-images.githubusercontent.com/6417910/99155780-1662c180-26e1-11eb-92b8-7ae6c2fb22a2.gif)
 
-## Usage
 
+## Usage
 
 ### System requirements
 
 - NodeJS 10+. The tool does work with NodeJS 8.x, but we do not officially support it.
 
+Tested on macOS, Linux and Windows (via [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab))
+
 ### Installation
 
-We recommend executing this via `npx` as this tool would be used rather infrequently
+Install the cli globally via npm
 
-```
-$ npx @campvanilla/ditto-cli
-```
-
-If you do want to install this tool to your machine, do install it globally
-
-```
+```bash
 $ npm install -g @campvanilla/ditto-cli
 
 $ ditto-cli
@@ -34,21 +33,25 @@ $ ditto-cli
 
 **Recommendation:** Since the usage of this cli is probably infrequent, we recommend using `npx` to run the cli rather than installing the package globally
 
+```bash
+npx @campvanilla/ditto-cli
+```
+
 ### Custom Options
 
 <table>
   <thead>
     <tr>
-      <th width='30%'>
+      <th width='20%'>
         CLI Argument
       </th>
-      <th width='15%'>
+      <th width='10%'>
         Optional
       </th>
-      <th width='35%'>
+      <th width='45%'>
         Description
       </th>
-      <th width='20%'>
+      <th width='25%'>
         Default Value
       </th>
     </tr>
@@ -58,7 +61,11 @@ $ ditto-cli
       <td>--extensionsDir</td>
       <td>yes</td>
       <td>To specify the folder containing your VSCode extensions you've configured VSCode to save extensions in a custom directory</td>
-      <td>~/.vscode/extensions</td>
+      <td>
+        <p>Mac: ~/.vscode/extensions</p>
+        <p>Linux: ~/.vscode/extensions</p>
+        <p>Windows: C:/Users/{currentUser}/.vscode/extensions</p>
+      </td>
     </tr>
     <tr>
       <td>--outDir</td>

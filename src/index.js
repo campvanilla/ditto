@@ -20,19 +20,22 @@ const createAndWriteTheme = async (options) => {
 
   const iTermTheme = await convertTheme(theme);
 
-  await writeFile(filePath, iTermTheme, { encoding: 'utf-8' });
+  if (!global.cliArgs[CLI_ARGS.DRY_RUN.key]) {
+    await writeFile(filePath, iTermTheme, { encoding: 'utf-8' });
+  }
+
   return filePath;
 };
 
 async function main() {
   try {
-    const cliArgs = extractCliArguments(process.argv);
+    global.cliArgs = extractCliArguments(process.argv);
 
-    if (cliArgs[CLI_ARGS.HELP.key] || !validateArgs(cliArgs)) {
+    if (global.cliArgs[CLI_ARGS.HELP.key] || !validateArgs(global.cliArgs)) {
       renderHelp();
     }
 
-    const vscodeExtensionsPath = cliArgs[CLI_ARGS.EXTENSIONS_DIR.key] || EXTENSIONS_DIR;
+    const vscodeExtensionsPath = global.cliArgs[CLI_ARGS.EXTENSIONS_DIR.key] || EXTENSIONS_DIR;
 
     const extensions = await getExtensions(vscodeExtensionsPath);
 
@@ -49,7 +52,7 @@ async function main() {
 
     const writtenPath = await createAndWriteTheme({
       theme: selectedTheme,
-      directory: cliArgs[CLI_ARGS.OUTPUT_DIR],
+      directory: global.cliArgs[CLI_ARGS.OUTPUT_DIR],
     });
 
     console.log(`Theme file exported as ${style.green.open}${writtenPath}${style.green.close}`);

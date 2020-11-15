@@ -9,16 +9,28 @@ exports.EXTENSIONS_DIR = `${homedir}/.vscode/extensions`;
 
 exports.CLI_ARGS = {
   EXTENSIONS_DIR: {
-    key: '--extensionsDir',
+    key: '--extensions-dir',
     helpText: 'Path to directory containing your vscode extensions.',
     optional: true,
     defaultValue: () => exports.EXTENSIONS_DIR,
   },
   OUTPUT_DIR: {
-    key: '--outDir',
+    key: '--out-dir',
     helpText: 'Folder to save the iterm2 theme.',
     optional: true,
     defaultValue: () => process.cwd(),
+  },
+  VERBOSE: {
+    key: '--verbose',
+    helpText: 'Execute cli with verbose output.',
+    optional: true,
+    defaultValue: () => false,
+  },
+  DRY_RUN: {
+    key: '--dry-run',
+    helpText: 'Execute cli without writing iterm2 theme file to disk.',
+    optional: true,
+    defaultValue: () => false,
   },
   HELP: {
     key: '--help',

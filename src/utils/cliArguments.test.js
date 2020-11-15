@@ -27,4 +27,23 @@ describe('extractCliArguments()', () => {
 
     expect(cliArgs['--help']).toBe(true);
   });
+
+  it('parses CLI consecutive arguments with no value as boolean', () => {
+    const cliArgs = extractCliArguments([
+      'node',
+      'jest',
+      '--help',
+      '--verbose',
+      '--out-dir=blahOut',
+      '--extensions-dir',
+      'blahIn',
+      '--dry-run',
+    ]);
+
+    expect(cliArgs['--help']).toBe(true);
+    expect(cliArgs['--verbose']).toBe(true);
+    expect(cliArgs['--dry-run']).toBe(true);
+    expect(cliArgs['--out-dir']).toBe('blahOut');
+    expect(cliArgs['--extensions-dir']).toBe('blahIn');
+  });
 });

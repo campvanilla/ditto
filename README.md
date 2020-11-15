@@ -58,7 +58,7 @@ npx @campvanilla/ditto-cli
   </thead>
   <tbody>
     <tr>
-      <td>--extensionsDir</td>
+      <td>--extensions-dir</td>
       <td>yes</td>
       <td>To specify the folder containing your VSCode extensions you've configured VSCode to save extensions in a custom directory</td>
       <td>
@@ -68,10 +68,22 @@ npx @campvanilla/ditto-cli
       </td>
     </tr>
     <tr>
-      <td>--outDir</td>
+      <td>--out-dir</td>
       <td>yes</td>
       <td>To specify the folder to which the iTerm2 theme file will be written</td>
       <td>The current working directory</td>
+    </tr>
+    <tr>
+      <td>--verbose</td>
+      <td>yes</td>
+      <td>Execute cli with verbose output</td>
+      <td>false</td>
+    </tr>
+    <tr>
+      <td>--dry-run</td>
+      <td>yes</td>
+      <td>Execute script without writing final iTerm2 theme to disk</td>
+      <td>false</td>
     </tr>
     <tr>
       <td>--help</td>

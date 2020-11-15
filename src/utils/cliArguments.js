@@ -9,9 +9,12 @@ exports.extractCliArguments = (argsList) => {
     } else {
       const option = argsList[i];
       const value = argsList[i + 1];
-      cliArgs[option] = value || true;
-
-      i += 1;
+      if (!value || value.indexOf('--') === -1) {
+        cliArgs[option] = value || true;
+        i += 1;
+      } else {
+        cliArgs[option] = true;
+      }
     }
   }
 

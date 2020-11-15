@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Banner" src="https://user-images.githubusercontent.com/6417910/99180787-5b254180-274f-11eb-885a-a5cff3dee7c7.png">
+  <img width="570" alt="Banner" src="https://user-images.githubusercontent.com/6417910/99180829-a8a1ae80-274f-11eb-9b19-ef8ed796bc83.png">
 </div>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->

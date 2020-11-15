@@ -2,7 +2,7 @@
 
 const path = require('path');
 const style = require('ansi-styles');
-const { Select } = require('enquirer');
+const { AutoComplete } = require('enquirer');
 
 const { writeFile } = require('./utils/promises');
 const { EXTENSIONS_DIR, CLI_ARGS } = require('./constants');
@@ -41,9 +41,10 @@ async function main() {
 
     const themes = await getThemes(extensions, vscodeExtensionsPath);
 
-    const prompt = new Select({
+    const prompt = new AutoComplete({
       name: 'themes',
       message: 'Select the vscode theme:',
+      limit: 10,
       choices: Object.keys(themes),
     });
 

@@ -44,7 +44,6 @@ async function main() {
     const prompt = new AutoComplete({
       name: 'themes',
       message: 'Select the vscode theme:',
-      limit: 10,
       choices: Object.keys(themes),
     });
 

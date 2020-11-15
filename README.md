@@ -2,8 +2,8 @@
   <img width="570" alt="Banner" src="https://user-images.githubusercontent.com/6417910/99180829-a8a1ae80-274f-11eb-9b19-ef8ed796bc83.png">
 </div>
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+![CI](https://github.com/campvanilla/ditto/workflows/Unit%20Tests%20CI/badge.svg?branch=main&event=push) ![npm (scoped)](https://img.shields.io/npm/v/@campvanilla/ditto-cli?style=flat) ![GitHub](https://img.shields.io/github/license/campvanilla/ditto?color=yellow&style=flat) <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## ditto
@@ -11,7 +11,6 @@
 > A CLI tool to convert your VSCode theme to an iTerm2 theme. 🎨
 
 ![BannerGif](https://user-images.githubusercontent.com/6417910/99155780-1662c180-26e1-11eb-92b8-7ae6c2fb22a2.gif)
-
 
 ## Usage
 
@@ -21,9 +20,15 @@
 
 Tested on macOS, Linux and Windows (via [Windows Terminal](https://www.microsoft.com/en-us/p/windows-terminal/9n0dx20hk701?activetab=pivot:overviewtab))
 
-### Installation
+### Running / Installation
 
-Install the cli globally via npm
+We recommend using `npx` to run the CLI:-
+
+```bash
+npx @campvanilla/ditto-cli
+```
+
+Or, alternatively, install it globally via npm and then run:-
 
 ```bash
 $ npm install -g @campvanilla/ditto-cli
@@ -31,11 +36,9 @@ $ npm install -g @campvanilla/ditto-cli
 $ ditto-cli
 ```
 
-**Recommendation:** Since the usage of this cli is probably infrequent, we recommend using `npx` to run the cli rather than installing the package globally
+### Setting in iTerm2
 
-```bash
-npx @campvanilla/ditto-cli
-```
+Once an iterm color scheme file is generated, `Cmd + Click` on the _file name_ (with extension as `*.itermcolors`) in `iTerm2` to automatically import the preset into iTerm & then select the theme from preferences (`Cmd + i` → `Colors` tab → `Color Presets` → Select the generated color preset).
 
 ### Custom Options
 

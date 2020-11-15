@@ -13,14 +13,14 @@ const { getExtensions, getThemes } = require('./utils/vscode');
 const { validateArgs } = require('./utils/validateArgs');
 
 const createAndWriteTheme = async (options) => {
-  const { theme, directory = '.' } = options || {};
+  const { theme, directory = '.', shouldWrite = true } = options || {};
 
   const fileName = `${theme.name}-${Date.now()}.itermcolors`;
   const filePath = path.resolve(directory, fileName);
 
   const iTermTheme = await convertTheme(theme);
 
-  if (!global.cliArgs[CLI_ARGS.DRY_RUN.key]) {
+  if (shouldWrite) {
     await writeFile(filePath, iTermTheme, { encoding: 'utf-8' });
   }
 
@@ -53,6 +53,7 @@ async function main() {
     const writtenPath = await createAndWriteTheme({
       theme: selectedTheme,
       directory: global.cliArgs[CLI_ARGS.OUTPUT_DIR.key],
+      shouldWrite: !global.cliArgs[CLI_ARGS.DRY_RUN.key],
     });
 
     console.log(`Theme file exported as ${style.green.open}${writtenPath}${style.green.close}`);

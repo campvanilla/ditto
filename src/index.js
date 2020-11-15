@@ -52,7 +52,7 @@ async function main() {
 
     const writtenPath = await createAndWriteTheme({
       theme: selectedTheme,
-      directory: global.cliArgs[CLI_ARGS.OUTPUT_DIR],
+      directory: global.cliArgs[CLI_ARGS.OUTPUT_DIR.key],
     });
 
     console.log(`Theme file exported as ${style.green.open}${writtenPath}${style.green.close}`);

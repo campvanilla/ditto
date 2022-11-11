@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { stat, readdir, readFile } = require('./promises');
+const { stat, readdir, safeReadFile } = require('./promises');
 
 exports.getExtensions = async (extensionsDir) => {
   const entities = await readdir(extensionsDir);
@@ -22,7 +22,9 @@ exports.getThemes = async (extensions, extensionsDir) => {
   let themes = {};
 
   for (let extension of extensions) {
-    const packageJSON = await readFile(`${extensionsDir}/${extension}/package.json`);
+    const packageJSON = await safeReadFile(`${extensionsDir}/${extension}/package.json`);
+    if (!packageJSON) continue;
+
     const data = JSON.parse(packageJSON);
     const { themes: contributingThemes } = data.contributes || {};
 

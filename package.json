@@ -17,9 +17,10 @@
   },
   "description": "Convert vscode theme to iterm2 colors",
   "main": "src/index.js",
-  "files": [
-    "src"
-  ],
+  "files": ["src"],
+  "engines": {
+    "node": ">=14"
+  },
   "bin": {
     "@campvanilla/ditto-cli": "src/index.js",
     "ditto-cli": "src/index.js"
